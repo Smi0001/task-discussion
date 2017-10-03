@@ -1,0 +1,110 @@
+.todo-header {
+    height: 250px;
+    background: rgb(40,53,147)none repeat scroll 0 0;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+.todo-div {
+    background: #fff none repeat scroll 0 0;
+    color: #747474;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    width: 80%;
+    padding: 0;
+    font-size: large;
+    .todo-input {   
+        padding: 0;
+        input {
+            width: 100%; padding: 10px 10px 10px 50px; height: 50px; border: none;
+        }
+    }
+    .todo-list {
+        display: flex;
+        input {
+            margin: 5px 20px;
+            background-color: rgba(255, 0, 0, 0.87);
+        }
+    }
+    
+    .note {padding: 7px;}
+    .todo-filter {
+        display: flex;
+        margin-left: 400px;
+    }
+    .todo-length {float: left; padding: 5px; font-size: medium;}
+    .groupX.selected {
+        background-color: rgba(134, 134, 134, 0.96);
+        color: #fff;
+        cursor: default;
+    }
+}
+::-webkit-input-placeholder {
+    font-style: italic;
+    color:rgb(192,185,186);
+ }
+ :-moz-placeholder {
+    font-style: italic; 
+    color:rgb(192,185,186);
+ }
+ ::-moz-placeholder {
+    font-style: italic;  
+    color:rgb(192,185,186);
+ }
+ :-ms-input-placeholder {  
+    font-style: italic; 
+    color:rgb(192,185,186);
+ }
+ .hide {
+     display: none;
+ }
+.md-checkbox{
+    background-image:  url("/app/data/img/checkbox-default.png");
+    background-repeat:  no-repeat;
+    background-size: 18px 18px;
+} 
+.selected .md-checkbox {background-image: url('/app/data/img/checkbox-selected.png');}
+.selected .note{opacity: 0.5; text-decoration: line-through;}
+/***materail UI css***/
+.md-checkbox {
+    margin: 8px 10px 8px 30px;
+    cursor: pointer;
+    border-radius: 2px;
+    padding-left: 18px;
+    padding-right: 0;
+    line-height: 26px;
+    min-width: 18px;
+    min-height: 18px;
+}
+.groupX {
+    font-size: 16px;
+    margin: 0;
+    padding: 3px 15px 3px 15px;
+    color: rgb(49, 46, 46);
+    cursor: pointer;
+    background-color: rgba(224, 224, 224, 0.96);
+    text-transform: none;
+    font-weight: 400;
+    min-width:100px;
+}
+.md-button.left {
+    border-radius: 10px 0 0 10px;
+}
+.md-button.middle {
+    border-radius: 0;
+    border-left: 1px solid rgba(230, 230, 230, 0.96);
+    border-right: 1px solid rgba(230, 230, 230, 0.96);
+}
+
+.md-button.right {
+    border-radius: 0 10px 10px 0;
+}
+
+.md-button:hover {
+    background-color: rgba(193, 193, 193, 0.96);
+    color: rgba(44, 65, 164, 0.96);
+    transition: 0.3s;
+}

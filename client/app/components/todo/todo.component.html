@@ -1,0 +1,21 @@
+<div class="todo-header"></div>
+
+<ul class="todo-div" >
+    <li class="list-group-item">
+        <div class="todo-length">Total {{todoList.length}} items</div>
+        <div class="todo-filter">
+            <div class="groupX md-button left j-filter selected" ng-click="resetFilter();toggleSelection($event);">All</div>
+            <div class="groupX md-button middle j-filter" ng-click="filterTodo('active');toggleSelection($event);">Active</div>
+            <div class="groupX md-button right j-filter" ng-click="filterTodo('completed');toggleSelection($event);">Completed</div>
+        </div>
+    </li>
+    <li class="list-group-item todo-input">
+        <input placeholder="type here to add new todo item..."
+        ng-keypress="addNoteOnEnter($event)" />
+    </li>
+    <li ng-repeat="tod in todoList" class="todo-list list-group-item"
+     ng-class="{'selected' : tod.checked, 'hide': tod.active || tod.completed}">
+        <div class="md-checkbox" ng-click="toggleChecked(tod.id)"></div>
+        <div contenteditable="true" title="CLICK TO EDIT: {{tod.note}}" class="trim note">{{tod.note}}</div>
+    </li>
+</ul>

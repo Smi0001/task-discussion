@@ -2,6 +2,8 @@
 .tmp
 .git
 node_modules
+dist
+dist/*
 .settings
 *.log
 client/bundle.js

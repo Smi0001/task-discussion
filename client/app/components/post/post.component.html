@@ -1,0 +1,62 @@
+<div class="post-header"></div>
+
+<div class="search-wrap" >
+    <div class="search-icon" ng-click="searchPost()">
+    </div>
+    <input class="j-search" ng-keyup="searchPost($event)" placeholder="Search Posts" type="search">
+</div>
+
+<svg height="80" width="80" class="add-post" ng-click="addNewPost()">
+    <circle class="circle" cx="40" cy="40" r="30" stroke-width="3" fill="yellow"/>
+    <text x="33" y="50" style="font-size: 25px; font-weight: bold;" fill="rgb(156,156,156)">
+        +
+    </text>
+</svg>
+
+<div class="post-div">
+    <div class="day-wise" ng-repeat="postArray in postList">
+        <div ng-repeat="items in postArray track by $index" class="">
+            <div ng-if="$index == 0" class="day" ng-init="date = (items == aaj ? 'Today' : (items == kal? 'Yesterday': items))">
+                {{date}}
+            </div>
+            <div ng-if="$index == 1">
+                <div class="post-wise large-12" ng-repeat="_post in items track by $index">
+                    <div class="avatar col large-2" ng-init="user = _post.user" ng-include="'avatar.html'">
+                    </div>
+                    <div class="col large-10 topics">
+                        <div class="topic trim col large-12" ng-bind-html="trustAsHtml(_post.topic.note)"></div>
+                        <div class="col large-12">
+                            <div class="link reply">
+                                {{_post.topic.replies.length}}
+                                <span  ng-if="_post.topic.replies.length >= 2"> Replies</span>
+                                <span ng-if="_post.topic.replies.length < 2"> Reply</span>
+                            </div>
+                        </div>
+                        <div class="name col m-5">{{_post.user.name}} &#45; </div>
+                        <div class="desc trim col m-5" ng-bind-html="trustAsHtml(_post.topic.desc)"></div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="j-modal">
+    <div class="modal-content">
+        <div class="avatar j-avatar col large-2"></div>
+        <textarea class="j-post-text post-text" placeholder="What&#39;s new with you?"></textarea>
+    </div>
+    <div class="modal-footer">
+        <div class="modal-action modal-close waves-effect waves-red btn-flat md-button" 
+        ng-click="cancelPost()" >Cancel</div>
+        <div class="modal-action modal-close waves-effect waves-green btn-flat modal-success-btn md-button"
+        ng-click="savePost()">Post</div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="avatar.html">
+    <img ng-if="user && !user.userImg" class="user-img" alt="User Image" />
+    <img ng-if="user && user.userImg" ng-src="{{user.userImg}}" class="user-img" alt="User Image" />
+    <div class="name col" ng-if="user && user.loggedInUser">{{user.loggedInUser}}</div>
+</script>
+
