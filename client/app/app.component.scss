@@ -1,5 +1,5 @@
 $home-header-bg: rgb(246,125,125);
-$todo-header-bg: rgb(40,53,147);
+$todo-header-bg: rgb(186,104,200);
 $post-header-bg: rgb(17,207,210);
 
 body {
@@ -64,6 +64,15 @@ header {
   position: absolute;
   right: 20px;
   top: 5px;
+}
+.logout {
+  text-decoration: none;
+}
+.username {
+  color: #fff;
+  float: left;
+  line-height: 2;
+  margin: 2px 10px 2px 0;
 }
 .ui-view {
   top: 15%; width: 100%; position: absolute; left: 0px;

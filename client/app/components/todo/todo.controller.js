@@ -23,7 +23,7 @@ class todoController {
   addNoteOnEnter(_event) {
     var controller_scope = this;
     if (_event.keyCode == 13) {
-      console.log('enter pressed', controller_scope);
+      // console.log('enter pressed', controller_scope);
       var task = _event.target.value;
       var taskObj = {note: task};
       controller_scope.addNote(taskObj);

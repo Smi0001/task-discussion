@@ -1,5 +1,25 @@
 <div class="dash-header"></div>
+<h1 class="center welcome-msg">Welcome to Dashboard</h1>
+
 <div class="dash-div">
+    <div class="large-12">
+        <div class="large-2">
+            <div class="avatar">
+                <img ng-src="{{user.avatar}}" alt="User Image">
+            </div>
+        </div>
+        <div class="large-10 col">
+            <div class="topic large" contenteditable="true">{{user.fname}}</div>
+            <div class="topic" contenteditable="true">{{user.lname}}</div>
+        </div>                
+    </div>
+    <div class="large-12">
+        <div contenteditable="true" class="name large-6">{{user.email}}</div>
+        <div contenteditable="true" class="name">{{user.contact}}</div>
+    </div>
+    <div class="large-12">
+        <div contenteditable="true" class="name large-6">{{user.address}}</div>
+    </div>
+    
 </div>
-<h1 class="center">Welcome to Dashboard</h1>
 

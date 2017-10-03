@@ -6,21 +6,44 @@ class dashboardController {
       this.$scope.$location = $location;
       this.$scope.$window = $window;
       this.$scope.loginService = loginService;
-      this.$scope.user = this.$scope.loginService.getUserInfo(this.$scope.username);
       this.$scope.updateUserInfo = this.updateUserInfo;
       this.onReadyFn();
     }
     static get $inject() {
       return ['$rootScope', '$scope', '$location', '$window', 'loginService'];
     }
+
+    getUserInfo() {
+      var _scope = this.$scope;
+      // console.log('getUserInfo', _scope);
+      var username = _scope.$window.sessionStorage.getItem('username');
+      _scope.loginService.getUserInfo(username)
+      .then((response) => {
+        // console.log(response);
+        if(response && response.status == 200) {
+          _scope.user = response.data.user;
+          document.getElementById('j-userName').textContent = _scope.user.fname;
+        } else {
+          _scope.error = response.data.error;
+        }
+      }).catch(function(res) {
+          if (res.status == "401") {
+              _scope.loginService.ClearCredentials();
+          }
+      });
+    }
     onReadyFn() {
       document.getElementById('j-home').classList.add('selected');
       document.getElementById('j-todo').classList.remove('selected');
       document.getElementById('j-post').classList.remove('selected');
+      if (this.$scope && !this.$scope.user) {
+        this.getUserInfo();
+      }
+      // document.click();
     }
     //update user info
     updateUserInfo() {
-      var _scope = this;
+      var _scope = this.$scope;
       var params = {username: this.username};
       if (this.fname) params.fname = this.fname;
       if (this.lname) params.lname = this.lname;

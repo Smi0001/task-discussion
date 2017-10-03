@@ -20,6 +20,7 @@ class loginController {
       _scope.error = null;
       let credentials = {username: _scope.username, password: _scope.password};
       _scope.loginService.login(credentials).then(function(response) {
+        console.log('loged in:', response);
         if(response && response.status == 200) {
             _scope.loginService.setCredentials(response.data.username, response.data.sessionId);
             _scope.$location.path('/dashboard');
