@@ -1,0 +1,26 @@
+.login-overlay {
+    display: block;
+}
+.login-modal {
+    display: block;
+    height: 300px;
+    width: 450px;
+    .modal-content {
+        background-color: transparent;
+        border: none;
+        padding: 35px 100px;
+    }
+    input {
+        margin: 10px 0;
+    }
+    button {
+        background: rgb(16,108,200);
+        margin: 30px 0;
+    }
+}
+.alert-danger {
+    color: rgb(213,0,0);
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    text-align: center;
+}

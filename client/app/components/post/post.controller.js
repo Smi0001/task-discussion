@@ -6,7 +6,7 @@ class postController {
       this.$scope = $scope;
       this.$scope.postDateWiseMap = this.postsService.getPostsDateWise();
       this.$scope.postList = Array.from(this.$scope.postDateWiseMap)
-      console.log(this.$scope.postList);
+      // console.log(this.$scope.postList);
       this.$scope.setDay = this.setDay;
       this.$scope.aaj = $filter('date')(new Date(), 'MMM d, y');
       this.$scope.kal = $filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
@@ -17,11 +17,16 @@ class postController {
       this.$scope.cancelPost = this.cancelPost;
       this.$scope.savePost = this.savePost;
       this.$scope.$timeout = $timeout;
+      this.onReadyFn();
     }
     static get $inject() {
       return ['$scope', 'postsService', '$filter', '$sce', '$timeout'];
     }
-    
+    onReadyFn() {
+      document.getElementById('j-home').classList.remove('selected');
+      document.getElementById('j-todo').classList.remove('selected');
+      document.getElementById('j-post').classList.add('selected');
+    }
     trustAsHtml(html) {
       return this.$sce.trustAsHtml(html);
     }

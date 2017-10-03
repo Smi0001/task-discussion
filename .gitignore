@@ -9,3 +9,5 @@ dist/*
 client/bundle.js
 client/bundle.js.map
 .idea
+dist/bundle.js
+dist/index.html

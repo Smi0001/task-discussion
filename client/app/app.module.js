@@ -7,6 +7,7 @@ import DashboardController from './components/dashboard/dashboard.controller';
 import LoginController from './components/login/login.controller';
 import TodoController from './components/todo/todo.controller';
 import PostController from './components/post/post.controller';
+// import ngCookies from '../../node_modules/angular-cookies/angular-cookies';
 //uiRouter is chosen over ngRoute coz it allows nested views and
 // multiple named views, useful with larger app
 import uiRouter from 'angular-ui-router';
@@ -36,12 +37,8 @@ const angularApp = angular.module('app', [
     
     .state('todo', {
       url: '/dashboard/todo',
-      // views: {
-        // 'content@': {
-          templateUrl: 'app/components/todo/todo.component.html',
-          controller: TodoController
-        // }
-      // }
+      templateUrl: 'app/components/todo/todo.component.html',
+      controller: TodoController
     })
     .state('post', {
       url: '/dashboard/post',
@@ -55,29 +52,7 @@ const angularApp = angular.module('app', [
  // Default page for the router
  $urlRouterProvider.otherwise('/dashboard');
 })
-// .config(['$routeProvider', '$locationProvider',
-//   function ($routeProvider,  $locationProvider) {
-//     $locationProvider.hashPrefix('!');
-//     $routeProvider
-//     .when('/login', {
-//       templateUrl: loginTemplate,
-//       controller: LoginController
-//     })
-//     .when('/dashboard', {
-//       templateUrl: dashboardTemplate,
-//       controller: DashboardController
-//     })
-//     .when('/todo', {
-//       templateUrl: todoTemplate,
-//       controller: TodoController
-//     })
-//     .when('/post', {
-//       templateUrl: postTemplate,
-//       controller: PostController
-//     })
-//     .otherwise({ redirectTo: '/dashboard' });
-//   }
-// ])
+
 .run(['$rootScope', '$location', '$window',
   function ($rootScope, $location, $window) {
     // keep user logged in after page refresh
@@ -85,7 +60,8 @@ const angularApp = angular.module('app', [
     $rootScope.$on('$routeChangeStart', function () {
       // redirect to login page if not logged in
       console.log('on $routeChangeStart');
-      if ($location.path() !== '/' && !sessionId) {
+      var restrictedPage = $location.path() == '/login';
+      if (restrictedPage && !sessionId) {
         $location.path('/login');
       } else {
       // redirect to dashboard page if user is logged in
@@ -95,4 +71,5 @@ const angularApp = angular.module('app', [
       }
   });
 }])
+
 .component('app', appComponent);

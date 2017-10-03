@@ -1,3 +1,7 @@
+$home-header-bg: rgb(246,125,125);
+$todo-header-bg: rgb(40,53,147);
+$post-header-bg: rgb(17,207,210);
+
 body {
   background-color: #E2E2E2;
   color: #000000;
@@ -13,12 +17,39 @@ header {
   width: 100%;
   font-size: xx-large;
   z-index: 500;
-  .md-button {
+  a {
     color: #fff;
     text-decoration:  none;
     font-size: large;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease 0s;
+    border: medium none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
   }
+  a:hover, a:active {
+    text-decoration: none;
+    color: rgb(255,235,59);
+  }
+  a:active { color: #fff;}
 }
+#j-home.selected {
+  background: $todo-header-bg;
+}
+#j-todo.selected {
+  background: $post-header-bg;
+}
+#j-post.selected {
+  background: $home-header-bg;
+}
+
 .container {
   display: block;
   width: 100%;
@@ -27,7 +58,13 @@ header {
     font-family: 'Open Sans Condensed', sans-serif;
   }
 }
-
+.login-link {
+  font-size: medium;
+  margin: 5px;
+  position: absolute;
+  right: 20px;
+  top: 5px;
+}
 .ui-view {
   top: 15%; width: 100%; position: absolute; left: 0px;
 }
@@ -111,7 +148,6 @@ header {
 .md-button.md-cornered {
   border-radius: 0;
 }
-
 .col {
   left: auto;
   margin-left: auto;

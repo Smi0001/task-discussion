@@ -10,10 +10,15 @@ class todoController {
     this.$scope.filterTodo = this.filterTodo;
     this.$scope.resetFilter = this.resetFilter;
     this.$scope.toggleSelection = this.toggleSelection;
-      // console.log('constructor', this);
+    this.onReadyFn();
   }
   static get $inject() {
     return ['$scope', 'todoService'];
+  }
+  onReadyFn() {
+    document.getElementById('j-home').classList.remove('selected');
+    document.getElementById('j-todo').classList.add('selected');
+    document.getElementById('j-post').classList.remove('selected');
   }
   addNoteOnEnter(_event) {
     var controller_scope = this;
