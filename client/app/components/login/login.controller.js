@@ -29,7 +29,7 @@ class loginController {
           }
         }).catch(function(res) {
             if (res.status == "401") {
-                _scope.loginService.ClearCredentials();
+                _scope.loginService.clearCredentials();
             }
         });
       }

@@ -15,19 +15,21 @@ class dashboardController {
 
     getUserInfo() {
       var _scope = this.$scope;
-      // console.log('getUserInfo', _scope);
       var username = _scope.$window.sessionStorage.getItem('username');
-      _scope.loginService.getUserInfo(username)
-      .then((response) => {
-        // console.log(response);
-        if(response && response.status == 200) {
-          _scope.user = response.data.user;
-          document.getElementById('j-userName').textContent = _scope.user.fname;
-        } else {
-          _scope.loginService.ClearCredentials();
-          _scope.error = response.data.error;
-        }
-      });
+      if (username) {
+        _scope.loginService.getUserInfo(username)
+        .then((response) => {
+          if(response && response.status == 200) {
+            _scope.user = response.data.user;
+            document.getElementById('j-userName').textContent = _scope.user.fname;
+          } else {
+            _scope.loginService.clearCredentials();
+            _scope.error = response.data.error;
+          }
+        });
+      } else {
+        _scope.$location.path('/login');
+      }
     }
     onReadyFn() {
       document.getElementById('j-home').classList.add('selected');

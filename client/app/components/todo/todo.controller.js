@@ -1,5 +1,5 @@
 class todoController {
-  constructor($scope, todoService, $window, loginService) {
+  constructor($scope, todoService, $window, loginService, $location) {
     this.name = 'todo';
     this.todoService = todoService;
     this.$scope = $scope;
@@ -11,11 +11,12 @@ class todoController {
     this.$scope.resetFilter = this.resetFilter;
     this.$scope.toggleSelection = this.toggleSelection;
     this.$scope.$window = $window;
+    this.$scope.$location = $location;    
     this.$scope.loginService = loginService;
     this.onReadyFn();
   }
   static get $inject() {
-    return ['$scope', 'todoService', '$window', 'loginService'];
+    return ['$scope', 'todoService', '$window', 'loginService', '$location'];
   }
   onReadyFn() {
     document.getElementById('j-home').classList.remove('selected');
@@ -29,16 +30,20 @@ class todoController {
   getUserInfo() {
     var _scope = this.$scope;
     var username = _scope.$window.sessionStorage.getItem('username');
-    _scope.loginService.getUserInfo(username)
-    .then((response) => {
-      if(response && response.status == 200) {
-        _scope.user = response.data.user;
-        document.getElementById('j-userName').textContent = _scope.user.fname;
-      } else {
-        _scope.loginService.ClearCredentials();
-        _scope.error = response.data.error;
-      }
-    });
+    if (username) {
+      _scope.loginService.getUserInfo(username)
+      .then((response) => {
+        if(response && response.status == 200) {
+          _scope.user = response.data.user;
+          document.getElementById('j-userName').textContent = _scope.user.fname;
+        } else {
+          _scope.loginService.clearCredentials();
+          _scope.error = response.data.error;
+        }
+      });
+    } else {
+      _scope.$location.path('/login');
+    }
   }
 
   addNoteOnEnter(_event) {

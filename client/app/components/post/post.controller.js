@@ -1,6 +1,6 @@
 
 class postController {
-  constructor($scope, postsService, $filter, $sce, loginService, $window) {
+  constructor($scope, postsService, $filter, $sce, loginService, $window, $location) {
       this.name = 'post';
       this.$scope = $scope;
       this.$scope.postsService = postsService;
@@ -18,11 +18,12 @@ class postController {
       this.$scope.savePost = this.savePost;
       this.$scope.loginService = loginService;
       this.$scope.$window = $window;
+      this.$scope.$location = $location;
       this.onReadyFn();
     }
     static get $inject() {
       return ['$scope', 'postsService', '$filter', '$sce',
-       'loginService', '$window'];
+       'loginService', '$window', '$location'];
     }
     onReadyFn() {
       document.getElementById('j-home').classList.remove('selected');
@@ -34,19 +35,21 @@ class postController {
     }
     getUserInfo() {
       var _scope = this.$scope;
-      // console.log('getUserInfo', _scope);
       var username = _scope.$window.sessionStorage.getItem('username');
-      _scope.loginService.getUserInfo(username)
-      .then((response) => {
-        // console.log(response);
-        if(response && response.status == 200) {
-          _scope.user = response.data.user;
-          document.getElementById('j-userName').textContent = _scope.user.fname;
-        } else {
-          _scope.loginService.ClearCredentials();
-          _scope.error = response.data.error;
-        }
-      });
+      if (username) {
+        _scope.loginService.getUserInfo(username)
+        .then((response) => {
+          if(response && response.status == 200) {
+            _scope.user = response.data.user;
+            document.getElementById('j-userName').textContent = _scope.user.fname;
+          } else {
+            _scope.loginService.clearCredentials();
+            _scope.error = response.data.error;
+          }
+        });
+      } else {
+        _scope.$location.path('/login');
+      }
     }
 
     trustAsHtml(html) {
