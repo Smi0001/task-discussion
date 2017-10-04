@@ -8,7 +8,7 @@
         {
             "username": "shammi1", "fname": "Abc", "lname": "Xyz",
             "email": "abc_xyz@gmail.com", "contact": "1234567890",
-            "avatar": "app/data/img/user0.jpg", "address": "New Delhi, India"
+            "avatar": "app/data/img/user0.png", "address": "New Delhi, India"
         },
         {
             "username": "shammi2", "fname": "Baad me btayenge", "lname": "bol to diye baad me btayenge",

@@ -2,24 +2,33 @@
 <h1 class="center welcome-msg">Welcome to Dashboard</h1>
 
 <div class="dash-div">
-    <div class="large-12">
-        <div class="large-2">
+    <div class="row-1">
+        <div class="large-3">
             <div class="avatar">
-                <img ng-src="{{user.avatar}}" alt="User Image">
+                <img ng-src="{{user.avatar}}" alt="User Image" class="user-img">
             </div>
         </div>
-        <div class="large-10 col">
-            <div class="topic large" contenteditable="true">{{user.fname}}</div>
-            <div class="topic" contenteditable="true">{{user.lname}}</div>
+        <div class="large-9 col name-div ">
+            <div class="large-6 name">First Name</div>
+            <div class="large-6 name">Last Name</div>
+            <div class="topic large-6 fl" contenteditable="true trim" title="{{user.fname}}">{{user.fname}}</div>
+            <div class="topic large-6 fl" contenteditable="true trim" title="{{user.lname}}">{{user.lname}}</div>
         </div>                
     </div>
-    <div class="large-12">
-        <div contenteditable="true" class="name large-6">{{user.email}}</div>
-        <div contenteditable="true" class="name">{{user.contact}}</div>
+    <div class="row-2 fl">
+        <div class="large-12 contact-div">
+            <div class="large-12 name fl">Email</div>
+            <div contenteditable="true" class="topic large-12 fl trim" title="{{user.email}}">{{user.email}}</div>
+        </div>
+        <div class="large-12 contact-div">
+            <div class="large-12 fl name">Contact</div>
+            <div contenteditable="true" class="topic large-12 fl" title="{{user.contact}}">{{user.contact}}</div>
+        </div>
+        <div class="large-12 contact-div">
+            <div class="large-12 name fl">Address</div>
+            <div contenteditable="true" class="topic large-12 fl trim" title="{{user.address}}">{{user.address}}</div>
+        </div>
     </div>
-    <div class="large-12">
-        <div contenteditable="true" class="name large-6">{{user.address}}</div>
-    </div>
-    
+    <textarea class="large-12 row-2 contact-div fl" placeholder="Some more info about you"></textarea>
 </div>
 
