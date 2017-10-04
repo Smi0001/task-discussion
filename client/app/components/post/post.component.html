@@ -44,7 +44,7 @@
 <div class="modal" id="j-modal">
     <div class="modal-content">
         <div class="avatar j-avatar col large-2"></div>
-        <textarea class="j-post-text post-text" placeholder="What&#39;s new with you?"></textarea>
+        <textarea class="j-post-text post-text" ng-model="postText" placeholder="What&#39;s new with you?"></textarea>
     </div>
     <div class="modal-footer">
         <div class="modal-action modal-close waves-effect waves-red btn-flat md-button" 
@@ -55,8 +55,8 @@
 </div>
 
 <script type="text/ng-template" id="avatar.html">
-    <img ng-if="user && !user.userImg" class="user-img" alt="User Image" />
-    <img ng-if="user && user.userImg" ng-src="{{user.userImg}}" class="user-img" alt="User Image" />
+    <img ng-if="user && !user.avatar" class="user-img" alt="User Image" />
+    <img ng-if="user && user.avatar" ng-src="{{user.avatar}}" class="user-img" alt="User Image" />
     <div class="name col" ng-if="user && user.loggedInUser">{{user.loggedInUser}}</div>
 </script>
 

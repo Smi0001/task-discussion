@@ -24,12 +24,9 @@ class dashboardController {
           _scope.user = response.data.user;
           document.getElementById('j-userName').textContent = _scope.user.fname;
         } else {
+          _scope.loginService.ClearCredentials();
           _scope.error = response.data.error;
         }
-      }).catch(function(res) {
-          if (res.status == "401") {
-              _scope.loginService.ClearCredentials();
-          }
       });
     }
     onReadyFn() {
