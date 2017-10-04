@@ -1,34 +1,23 @@
 class dashboardController {
-    constructor($rootScope, $scope, $location, $window, loginService) {
+    constructor($rootScope, $scope, $location, loginService) {
       this.name = 'dashboard';
       this.$scope = $scope;
       this.$scope.username = $rootScope.username; 
       this.$scope.$location = $location;
-      this.$scope.$window = $window;
       this.$scope.loginService = loginService;
       this.$scope.updateUserInfo = this.updateUserInfo;
       this.onReadyFn();
     }
     static get $inject() {
-      return ['$rootScope', '$scope', '$location', '$window', 'loginService'];
+      return ['$rootScope', '$scope', '$location', 'loginService'];
     }
-
-    getUserInfo() {
+    
+    handleUserSession() {
       var _scope = this.$scope;
-      var username = _scope.$window.sessionStorage.getItem('username');
-      if (username) {
-        _scope.loginService.getUserInfo(username)
-        .then((response) => {
-          if(response && response.status == 200) {
-            _scope.user = response.data.user;
-            document.getElementById('j-userName').textContent = _scope.user.fname;
-          } else {
-            _scope.loginService.clearCredentials();
-            _scope.error = response.data.error;
-          }
-        });
-      } else {
+      if (_scope.loginService.isSessionTimeOut()) {
         _scope.$location.path('/login');
+      } else {
+        _scope.loginService.setUserInScopeFromSession(_scope);
       }
     }
     onReadyFn() {
@@ -36,9 +25,8 @@ class dashboardController {
       document.getElementById('j-todo').classList.remove('selected');
       document.getElementById('j-post').classList.remove('selected');
       if (this.$scope && !this.$scope.user) {
-        this.getUserInfo();
+        this.handleUserSession();
       }
-      // document.click();
     }
     //update user info
     updateUserInfo() {

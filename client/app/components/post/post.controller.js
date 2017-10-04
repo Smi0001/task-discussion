@@ -1,6 +1,6 @@
 
 class postController {
-  constructor($scope, postsService, $filter, $sce, loginService, $window, $location) {
+  constructor($scope, postsService, $filter, $sce, loginService, $location) {
       this.name = 'post';
       this.$scope = $scope;
       this.$scope.postsService = postsService;
@@ -17,38 +17,28 @@ class postController {
       this.$scope.cancelPost = this.cancelPost;
       this.$scope.savePost = this.savePost;
       this.$scope.loginService = loginService;
-      this.$scope.$window = $window;
       this.$scope.$location = $location;
       this.onReadyFn();
     }
     static get $inject() {
       return ['$scope', 'postsService', '$filter', '$sce',
-       'loginService', '$window', '$location'];
+       'loginService', '$location'];
+    }
+
+    handleUserSession() {
+      var _scope = this.$scope;
+      if (_scope.loginService.isSessionTimeOut()) {
+        _scope.$location.path('/login');
+      } else {
+        _scope.loginService.setUserInScopeFromSession(_scope);
+      }
     }
     onReadyFn() {
       document.getElementById('j-home').classList.remove('selected');
       document.getElementById('j-todo').classList.remove('selected');
       document.getElementById('j-post').classList.add('selected');
       if (this.$scope && !this.$scope.user) {
-        this.getUserInfo();
-      }
-    }
-    getUserInfo() {
-      var _scope = this.$scope;
-      var username = _scope.$window.sessionStorage.getItem('username');
-      if (username) {
-        _scope.loginService.getUserInfo(username)
-        .then((response) => {
-          if(response && response.status == 200) {
-            _scope.user = response.data.user;
-            document.getElementById('j-userName').textContent = _scope.user.fname;
-          } else {
-            _scope.loginService.clearCredentials();
-            _scope.error = response.data.error;
-          }
-        });
-      } else {
-        _scope.$location.path('/login');
+        this.handleUserSession();
       }
     }
 

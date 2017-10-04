@@ -1,7 +1,8 @@
 class loginController {
-    constructor($scope, $window, loginService, $location) {
+    constructor($rootScope, $scope, $window, loginService, $location) {
       this.name = 'login';
       this.$scope = $scope;
+      this.$scope.redirectingUrl = $rootScope.redirectingUrl;
       this.$scope.loginService = loginService;
       this.$scope.logout = this.logout;
       this.$scope.logout();
@@ -9,7 +10,7 @@ class loginController {
       this.$scope.$location = $location;
     }
     static get $inject() {
-      return ['$scope', '$window', 'loginService', '$location'];
+      return ['$rootScope', '$scope', '$window', 'loginService', '$location'];
     }
     logout() {
       this.loginService.clearCredentials();
@@ -20,10 +21,10 @@ class loginController {
       _scope.error = null;
       let credentials = {username: _scope.username, password: _scope.password};
       _scope.loginService.login(credentials).then(function(response) {
-        console.log('loged in:', response);
         if(response && response.status == 200) {
             _scope.loginService.setCredentials(response.data.username, response.data.sessionId);
-            _scope.$location.path('/dashboard');
+            let redirectingUrl = _scope.redirectingUrl ? _scope.redirectingUrl : '/dashboard';
+            _scope.$location.path(redirectingUrl);
           } else {
             _scope.error = response.data.error;
           }
