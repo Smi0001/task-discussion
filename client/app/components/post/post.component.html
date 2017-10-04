@@ -32,7 +32,9 @@
                                 <span ng-if="_post.topic.replies.length < 2"> Reply</span>
                             </div>
                         </div>
-                        <div class="name col m-5">{{_post.user.name}} &#45; </div>
+                        <div class="name col m-5"
+                         ng-init="uName = (_post.user.name || _post.user.fname + ' ' + _post.user.lname)"
+                          title="{{uName}}">{{uName}} &#45; </div>
                         <div class="desc trim col m-5" ng-bind-html="trustAsHtml(_post.topic.desc)"></div> 
                     </div>
                 </div>
