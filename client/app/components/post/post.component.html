@@ -20,13 +20,14 @@
                 {{date}}
             </div>
             <div ng-if="$index == 1">
-                <div class="post-wise large-12" ng-repeat="_post in items track by $index">
+                <div class="post-wise large-12" ng-repeat="_post in items track by $index" 
+                ng-click="showComments(_post.date)">
                     <div class="avatar col large-2" ng-init="user = _post.user" ng-include="'avatar.html'">
                     </div>
                     <div class="col large-10 topics">
                         <div class="topic trim col large-12" ng-bind-html="trustAsHtml(_post.topic.note)"></div>
                         <div class="col large-12">
-                            <div class="link reply">
+                            <div class="reply">
                                 {{_post.topic.replies.length}}
                                 <span  ng-if="_post.topic.replies.length >= 2"> Replies</span>
                                 <span ng-if="_post.topic.replies.length < 2"> Reply</span>
@@ -45,7 +46,7 @@
 
 <div class="modal" id="j-modal">
     <div class="modal-content">
-        <div class="avatar j-avatar col large-2"></div>
+        <div class="avatar j-avatar col large-2" ng-init="user = _post.user" ng-include="'avatar.html'"></div>
         <textarea class="j-post-text post-text" ng-model="postText" placeholder="What&#39;s new with you?"></textarea>
     </div>
     <div class="modal-footer">
@@ -56,9 +57,20 @@
     </div>
 </div>
 
+<div class="modal" id="j-comment-modal">
+    <span class="close-btn" ng-click="closeCommentModal()">X</span>
+    <div class="modal-content">
+        <div class="avatar j-avatar col" ng-init="user = _post.user" ng-include="'avatar.html'"></div>
+        <input class="j-post-text post-comment" ng-model="postComment" placeholder="Join the discussion..." />
+        <div id="j-current-topics">
+        </div>
+    </div>
+</div>
+
+
 <script type="text/ng-template" id="avatar.html">
     <img ng-if="user && !user.avatar" class="user-img" alt="User Image" />
     <img ng-if="user && user.avatar" ng-src="{{user.avatar}}" class="user-img" alt="User Image" />
-    <div class="name col" ng-if="user && user.loggedInUser">{{user.loggedInUser}}</div>
+    <div class="name col">{{user.fname}} {{user.lname}}</div>
 </script>
 

@@ -6,7 +6,7 @@ class loginService {
   constructor($http, $q, $location, $window, $rootScope) {
     'ngInject';
     //INIT DEPENDENCIES
-    this.SESSION_TIMEOUT_MINUTES = 2;
+    this.SESSION_TIMEOUT_MINUTES = 30;
     this.$http = $http;
     this.$q = $q;
     this.$location = $location;

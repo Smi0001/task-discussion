@@ -18,7 +18,7 @@ class postsService {
   }
 
   setPost(modifiedPost) {
-    posts = modifiedPost;//save post to DB
+    posts = modifiedPost;//save posts to DB
   }
 
   getPostsSortedByRecentDay(posts) {
@@ -79,6 +79,24 @@ class postsService {
     let rawPost = this.getAllPosts();
     rawPost.push(postObj)//if saving to DB, need not ot push, directly send only new post to save 
     this.setPost(rawPost);
+  }
+
+  getPostByDate(selectedDate) {
+    let selectedPost = [];
+    let postArray = this.getAllPosts();
+    postArray.forEach(function(currentPost) {
+      currentPost.day = this.$filter('date')(new Date(currentPost.date), 'MMM d, y');
+    }, this);
+    // sorted by day
+    this.getPostsSortedByRecentDay(postArray);
+    console.log(selectedDate);
+    for(let i = 0; i < postArray.length; i++) {
+      if (postArray[i].date == Number(selectedDate)) {
+        selectedPost = postArray[i];
+        break;
+      }
+    }
+    return selectedPost;
   }
 }
 
