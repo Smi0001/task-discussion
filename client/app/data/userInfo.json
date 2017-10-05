@@ -6,14 +6,14 @@
             "avatar": "app/data/img/shammi.jpg", "address": "Lado Sarai, Delhi-30"
         },
         {
-            "username": "shammi1", "fname": "Abc", "lname": "Xyz",
-            "email": "abc_xyz@gmail.com", "contact": "1234567890",
+            "username": "shammi1", "fname": "second_user", "lname": "Xyz",
+            "email": "second_user@gmail.com", "contact": "1234567890",
             "avatar": "app/data/img/user0.png", "address": "New Delhi, India"
         },
         {
-            "username": "shammi2", "fname": "Baad me btayenge", "lname": "bol to diye baad me btayenge",
-            "email": "kuch_bhi@gmail.com", "contact": "email se contact krna",
-            "avatar": "app/data/img/user1.png", "address": "Ghar me rehte h"
+            "username": "shammi2", "fname": "third_user", "lname": "Xyz",
+            "email": "third_user@gmail.com", "contact": "0987654321",
+            "avatar": "app/data/img/user1.png", "address": "India, Delhi NCR"
         }
         
     ]

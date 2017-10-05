@@ -22,21 +22,23 @@
             <div ng-if="$index == 1">
                 <div class="post-wise large-12" ng-repeat="_post in items track by $index" 
                 ng-click="showComments(_post.date)">
-                    <div class="avatar col large-2" ng-init="user = _post.user" ng-include="'avatar.html'">
-                    </div>
-                    <div class="col large-10 topics">
+                    <avatar class="avatar" userimage="{{_post.user.avatar}}"
+                     username="{{_post.user.name}}" userfname="{{_post.user.fname}}"
+                     userlname="{{_post.user.lname}}"></avatar>
+                    <div class="col large-10 topics" ng-init="replies = _post.topic.replies">
                         <div class="topic trim col large-12" ng-bind-html="trustAsHtml(_post.topic.note)"></div>
                         <div class="col large-12">
                             <div class="reply">
-                                {{_post.topic.replies.length}}
-                                <span  ng-if="_post.topic.replies.length >= 2"> Replies</span>
-                                <span ng-if="_post.topic.replies.length < 2"> Reply</span>
+                                {{replies.length}}
+                                <img src="app/data/img/reply.svg" />
                             </div>
                         </div>
-                        <div class="name col m-5"
-                         ng-init="uName = (_post.user.name || _post.user.fname + ' ' + _post.user.lname)"
-                          title="{{uName}}">{{uName}} &#45; </div>
-                        <div class="desc trim col m-5" ng-bind-html="trustAsHtml(_post.topic.desc)"></div> 
+                        <div ng-repeat="reply in replies" ng-if="$index == 0">
+                            <div class="name col"
+                            ng-init="uName = (reply.user.name || reply.user.fname + ' ' + reply.user.lname)"
+                            title="{{uName}}">{{uName}} &#45; </div>
+                            <div class="desc trim col" ng-bind-html="trustAsHtml(reply.comments)"></div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,7 +48,9 @@
 
 <div class="modal" id="j-modal">
     <div class="modal-content">
-        <div class="avatar j-avatar col large-2" ng-init="user = _post.user" ng-include="'avatar.html'"></div>
+        <avatar class="avatar j-avatar col large-2"ng-if="user.avatar" userimage="{{user.avatar}}"
+            username="{{user.name}}" userfname="{{user.fname}}"
+            userlname="{{user.lname}}"></avatar>
         <textarea class="j-post-text post-text" ng-model="postText" placeholder="What&#39;s new with you?"></textarea>
     </div>
     <div class="modal-footer">
@@ -57,20 +61,10 @@
     </div>
 </div>
 
-<div class="modal" id="j-comment-modal">
-    <span class="close-btn" ng-click="closeCommentModal()">X</span>
-    <div class="modal-content">
-        <div class="avatar j-avatar col" ng-init="user = _post.user" ng-include="'avatar.html'"></div>
-        <input class="j-post-text post-comment" ng-model="postComment" placeholder="Join the discussion..." />
-        <div id="j-current-topics">
-        </div>
+<div class="modal comment-modal" id="j-comment-modal">
+    <span class="cancel-btn" ng-click="closeCommentModal()">
+        <img src="app/data/img/cancel.svg" />
+    </span>
+    <div class="modal-content" id="j-current-topics">
     </div>
 </div>
-
-
-<script type="text/ng-template" id="avatar.html">
-    <img ng-if="user && !user.avatar" class="user-img" alt="User Image" />
-    <img ng-if="user && user.avatar" ng-src="{{user.avatar}}" class="user-img" alt="User Image" />
-    <div class="name col">{{user.fname}} {{user.lname}}</div>
-</script>
-

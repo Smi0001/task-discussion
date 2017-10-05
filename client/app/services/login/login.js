@@ -91,39 +91,7 @@ class loginService {
     });
     return defer.promise;
   }
-/*
-  getUserInfo() {
-    const defer = this.$q.defer();
-    let username = this.getUserNameFromSession();
-    if (username) {
-      let res = {status: 401, data: {error: 'User info not found'}};
-      this.$http.get('/app/data/userInfo.json')
-      .then((response) => {
-        if (response && response.status == 200 && response.data) {
-          let userInfo = response.data.userInfo;
-          for(let i=0; i < userInfo.length; i++) {
-            if (userInfo[i].username == username) {
-              res.data.user = userInfo[i];
-              res.status = 200;
-              delete res.data.error;
-              break;
-            }
-          }
-          defer.resolve(res);
-        }
-      })
-      .catch(() => {
-        console.log('Error 500, during getUserInfo()');
-          defer.reject("Error 500");
-      });
 
-    } else {
-      defer.reject("Error 500");
-      console.log('username h  hi nhi session me');
-    }
-    return defer.promise;
-  }
-*/
   setUserInScopeFromSession(_scope) {
     let username = this.getUserNameFromSession();
     if (username) {

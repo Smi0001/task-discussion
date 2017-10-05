@@ -20,7 +20,10 @@ const angularApp = angular.module('app', [
   // ngMaterial, MdButtonModule, MdCheckboxModule,
   uiRouter
 ])
-.config(($locationProvider, $stateProvider, $urlRouterProvider) => {
+
+.component('app', appComponent)
+
+.config(['$urlRouterProvider',  '$stateProvider', ($urlRouterProvider,  $stateProvider) => {
   "ngInject";
   // $locationProvider.hashPrefix('!');
   $stateProvider
@@ -51,11 +54,13 @@ const angularApp = angular.module('app', [
 
  // Default page for the router
  $urlRouterProvider.otherwise('/dashboard');
-})
+}])
 
 .run(['$rootScope', '$location', '$window',
   function ($rootScope, $location, $window) {
     // keep user logged in after page refresh
+    console.log('on run');
+    
     var sessionId = $window.sessionStorage.getItem('sessionId');
     $rootScope.$on('$routeChangeStart', function () {
       // redirect to login page if not logged in
@@ -71,5 +76,4 @@ const angularApp = angular.module('app', [
       }
   });
 }])
-
-.component('app', appComponent);
+;

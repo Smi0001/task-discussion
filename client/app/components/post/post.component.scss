@@ -98,6 +98,9 @@ $post-box-shadow:  0 2px 5px 0 rgba(0, 0, 0, 0.26);
         cursor: pointer;
         background: #DBEFF5;
     }
+    .avatar .name {
+        display: none;
+    }
 }
 .avatar {
     height: 100px;
@@ -150,22 +153,14 @@ $post-box-shadow:  0 2px 5px 0 rgba(0, 0, 0, 0.26);
         font-style: normal;
         margin: 20px;
     }
-    .close-btn {
-        border-radius: 50%;
-        box-shadow: 1px 1px 5px 1px #000;
+    .cancel-btn {
         cursor: pointer;
-        font-size: xx-large;
-        height: 35px;
-        line-height: 0.95;
-        padding: 3px;
         position: absolute;
-        right: 6px;
-        top: 3px;
-        width: 27px;
-        z-index: 8;
+        right: 5px;
+        z-index: 10;
     }
 }
-#j-comment-modal {
+.comment-modal {
     max-height: 80%;
 
     .modal-content { height: 100%; }
@@ -178,14 +173,14 @@ $post-box-shadow:  0 2px 5px 0 rgba(0, 0, 0, 0.26);
             height: 85%;
             width: 75%;
         }
-        .user-img { border-radius: 20%; }
+        .user-img { border-radius: 15%; border: 1px solid grey;}
     }
     .post-comment {
         border: 3px solid #AAA6A6;
         border-radius: 3px;
         height: 60px;
         padding: 4px 8px;
-        resize: none;
+        font-size: large;
         width: 83%;
     }
     .post-comment::-moz-placeholder {
@@ -197,6 +192,7 @@ $post-box-shadow:  0 2px 5px 0 rgba(0, 0, 0, 0.26);
 .desc {
     color: grey;
     font-style: italic;
+    padding: 3px;
 }
 .m-5 {
     margin: 5px;
@@ -240,8 +236,6 @@ font-style: normal;
 }
 
 .day {color: grey}
-.name.m-5 { margin-left: none;}
-.desc.m-5 { margin-right: none;}
 .m-t-b {
     margin-top: 10px;
     margin-bottom: 10px;

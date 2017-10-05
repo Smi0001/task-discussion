@@ -1,2 +1,67 @@
-{{postArray}}
-//design comment section
+<div class="large-12 col">
+        <avatar class="avatar j-avatar col" ng-if="user" userimage="{{user.avatar}}"
+        username="{{user.name}}" userfname="{{user.fname}}"
+        userlname="{{user.lname}}"></avatar>
+    <input class="j-post-text post-comment" ng-model="postComment" placeholder="Join the discussion..."
+    ng-keypress="addCommentOnEnter($event)" />
+</div>
+<div class="large-12">
+    <div class="comment-section">
+        <div class="large-12">
+            <div class="col large-12 fl main-topic" style="">
+                    <avatar class="avatar col large-2" userimage="{{postArray.user.avatar}}"
+                    username="{{postArray.user.name}}" userfname="{{postArray.user.fname}}"
+                    userlname="{{postArray.user.lname}}"></avatar>
+                <div class="large-10 col">
+                        <div class="large-12 " style="font-size: small; font-weight: bolder;">
+                            <div class="names trim magenta col fl large-1"
+                            ng-init="uName = (postArray.user.name || postArray.user.fname + ' ' + postArray.user.lname)"
+                            title="{{uName}}">{{uName}}</div>
+                            <div class="day names col large-10" date="{{postArray.day}}">
+                                {{filterDate(postArray.date)}}
+                            </div>
+                        </div>
+                        <div class="large-12" ng-bind-html="trustAsHtml(postArray.topic.note)"></div>
+                        <div class="options">
+                            <span class="like"><img src="app/data/img/thumb_up.svg" /></span>
+                            <span class="dislike"><img src="app/data/img/thumb_down.svg" /></span>
+                            <span class="replied">
+                                    {{replies.length}}
+                                    <img src="app/data/img/reply.svg" />
+                            </span>
+                            <span class="share-post" title="Share"><img src="app/data/img/send.svg" /></span>
+                        </div>
+                </div>
+            </div>
+    
+            <div class="col large-11 reply-list">
+                <div ng-repeat="reply in replies" class="replies">
+                        <avatar class="avatar col large-2" userimage="{{reply.user.avatar}}"
+                        username="{{reply.user.name}}" userfname="{{reply.user.fname}}"
+                        userlname="{{reply.user.lname}}"></avatar>
+                    <div class="large-10 col">
+                        <div class="large-12 fl" style="font-size: small; font-weight: bolder;">
+                            <div class="trim names magenta col fl large-2"
+                            ng-init="uName1 = (reply.user.name || reply.user.fname + ' ' + reply.user.lname)"
+                            title="{{uName1}}">{{uName1}}</div>
+                            <span class="replied link fl"><img src="app/data/img/reply_all.svg" /></span>
+                            <div class="trim names day col fl large-2"
+                            ng-init="uName2 = (postArray.user.name || postArray.user.fname + ' ' + postArray.user.lname)"
+                            title="{{uName2}}">{{uName2}}</div>
+                            <div class="names day fl" date="{{reply.day}}">
+                                    {{filterDate(reply.date)}}
+                            </div>
+                        </div>
+                        <div class="large-12">
+                            <div class="desc trim col" ng-bind-html="trustAsHtml(reply.comments)"></div> 
+                            <div class="options">
+                                <span class="like"><img src="app/data/img/thumb_up.svg" /></span>
+                                <span class="dislike"><img src="app/data/img/thumb_down.svg" /></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

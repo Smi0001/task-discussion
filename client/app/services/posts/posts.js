@@ -4,13 +4,15 @@ var postDateWiseMap = new Map();
 var posts = angular.copy(rawPost);
 class postsService {
   
-  constructor($filter) {
+  constructor($filter, $rootScope) {
     'ngInject';
     this.$filter = $filter;
     this._posts = angular.copy(rawPost);
+    this.$rootScope = $rootScope;
+    
   }
   static get $inject() {
-    return ['$filter'];
+    return ['$filter', '$rootScope'];
   }
   
   getAllPosts() {
@@ -28,6 +30,16 @@ class postsService {
         1 :
         (
           (b.day > a.day) ? -1 : 0
+        );
+    });
+  }
+  getPostsSortedByRecentDate(posts) {
+    posts
+    .sort((b,a) => {
+      return (a.date > b.date) ?
+        1 :
+        (
+          (b.date > a.date) ? -1 : 0
         );
     });
   }
@@ -63,40 +75,51 @@ class postsService {
   
   addNewPost(postText, loggedInUser, postDate) {
     //create post object
-    let note = postText.split('\n')[0];
-    let desc = postText;
     let replies = [];
-    let postTopic = {
-      'note': note,
-      'desc': desc,
+    let newTopic = {
+      'note': postText,
       'replies': replies
     };
     let postObj = {
       'date': postDate,
       'user': loggedInUser,
-      'topic': postTopic
+      'topic': newTopic
     };
-    let rawPost = this.getAllPosts();
-    rawPost.push(postObj)//if saving to DB, need not ot push, directly send only new post to save 
-    this.setPost(rawPost);
+    posts.push(postObj)//if saving to DB, need not to push, directly send only new post to save 
   }
 
   getPostByDate(selectedDate) {
     let selectedPost = [];
-    let postArray = this.getAllPosts();
-    postArray.forEach(function(currentPost) {
-      currentPost.day = this.$filter('date')(new Date(currentPost.date), 'MMM d, y');
-    }, this);
-    // sorted by day
-    this.getPostsSortedByRecentDay(postArray);
-    console.log(selectedDate);
+    let postArray = posts;
     for(let i = 0; i < postArray.length; i++) {
       if (postArray[i].date == Number(selectedDate)) {
         selectedPost = postArray[i];
         break;
       }
     }
+    //sort by date first
+    this.getPostsSortedByRecentDate(selectedPost.topic.replies);
+    //assert corresponding days
+    selectedPost.topic.replies.forEach(function(reply) {
+      if (!reply.day)
+      reply.day = this.$filter('date')(new Date(reply.date), 'MMM d, y');
+    }, this);
+    // sort by day
+    this.getPostsSortedByRecentDay(selectedPost.topic.replies);
     return selectedPost;
+  }
+  addNewComment(postComment, loggedInUser, commentDate, selectedDate) {
+    let commentObj = {
+      date: commentDate,
+      user: loggedInUser,
+      comments: postComment
+    };
+    for(let i = 0; i < posts.length; i++) {
+      if (posts[i].date == selectedDate) {
+        posts[i].topic.replies.push(commentObj);
+        break;
+      }
+    }
   }
 }
 
