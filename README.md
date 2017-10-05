@@ -40,6 +40,7 @@
 
 *Will use Angular Material Libirary soon, found some issue in injecting to the main module.*
 
+
 # Project Features
 1. ```User authentication```
 2. ```Session management```
@@ -60,3 +61,11 @@
 3. Introduce ```Google / Facebook / Social Media Authentication``` using ```OAUTH 2.0```
 4. Deploy on ```Heroku``` / ```AWS``` servers to make it live.
 5. Introduce ```Guest feature``` *to get feedback*
+
+
+# References
+1. https://www.npmjs.com/package/angular-1.5-cli
+2. https://material.angularjs.org
+3. http://materializecss.com/color.html
+4. https://stackoverflow.com/
+5. https://www.google.co.in
