@@ -1,4 +1,4 @@
-# task-discussion
+# Task-Discussion
 
 # Steps to Setup the Project:
 
