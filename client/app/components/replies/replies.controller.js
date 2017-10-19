@@ -54,7 +54,7 @@ class repliesController {
         let _scope = this;
         if (_scope.postComment) {
           _scope.postsService.addNewComment(_scope.postComment, _scope.user, Number(new Date()), _scope.selectedDate);
-          _scope.postArray = _scope.postsService.getPostByDate(this.selectedDate);
+          _scope.postArray = _scope.postsService.getPostByDate(_scope.selectedDate);
           _scope.postComment = '';
         }
       }

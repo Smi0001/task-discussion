@@ -21,7 +21,7 @@
             </div>
             <div ng-if="$index == 1">
                 <div class="post-wise large-12" ng-repeat="_post in items track by $index" 
-                ng-click="showComments(_post.date)">
+                ng-click="showComments(_post.date)" title="Click for comments">
                     <avatar class="avatar" userimage="{{_post.user.avatar}}"
                      username="{{_post.user.name}}" userfname="{{_post.user.fname}}"
                      userlname="{{_post.user.lname}}"></avatar>

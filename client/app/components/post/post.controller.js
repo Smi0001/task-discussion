@@ -82,7 +82,7 @@ class postController {
     showComments(selectedDate) {
       let _scope = this;
       let newScope = _scope.$new(true, _scope);
-      newScope = angular.merge(newScope, selectedDate);
+      newScope.selectedDate = selectedDate;
       let html = '<replies selecteddate="' + selectedDate + '"></replies>';
       let element = document.getElementById('j-current-topics');
       element.innerHTML = "";

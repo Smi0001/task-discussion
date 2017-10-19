@@ -8,7 +8,7 @@
 <div class="large-12">
     <div class="comment-section">
         <div class="large-12">
-            <div class="col large-12 fl main-topic" style="">
+            <div class="col large-12 fl main-topic">
                     <avatar class="avatar col large-2" userimage="{{postArray.user.avatar}}"
                     username="{{postArray.user.name}}" userfname="{{postArray.user.fname}}"
                     userlname="{{postArray.user.lname}}"></avatar>
@@ -35,7 +35,7 @@
             </div>
     
             <div class="col large-11 reply-list">
-                <div ng-repeat="reply in replies" class="replies">
+                <div ng-repeat="reply in replies | orderBy : date" class="replies">
                         <avatar class="avatar col large-2" userimage="{{reply.user.avatar}}"
                         username="{{reply.user.name}}" userfname="{{reply.user.fname}}"
                         userlname="{{reply.user.lname}}"></avatar>
