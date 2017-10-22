@@ -9,7 +9,6 @@ class postsService {
     this.$filter = $filter;
     this._posts = angular.copy(rawPost);
     this.$rootScope = $rootScope;
-    
   }
   static get $inject() {
     return ['$filter', '$rootScope'];
@@ -23,7 +22,7 @@ class postsService {
     posts = modifiedPost;//save posts to DB
   }
 
-  getPostsSortedByRecentDay(posts) {
+  sortByRecentDay(posts) {
     posts
     .sort((b,a) => {
       return (a.day > b.day) ?
@@ -33,7 +32,7 @@ class postsService {
         );
     });
   }
-  getPostsSortedByRecentDate(posts) {
+  sortByRecentDate(posts) {
     posts
     .sort((b,a) => {
       return (a.date > b.date) ?
@@ -49,7 +48,7 @@ class postsService {
       currentPost.day = this.$filter('date')(new Date(currentPost.date), 'MMM d, y');
     }, this);
     // sorted by day
-    this.getPostsSortedByRecentDay(posts);
+    this.sortByRecentDay(posts);
 
     // club day wise
     postDateWiseMap.clear();
@@ -98,14 +97,14 @@ class postsService {
       }
     }
     //sort by date first
-    this.getPostsSortedByRecentDate(selectedPost.topic.replies);
+    this.sortByRecentDate(selectedPost.topic.replies);
     //assert corresponding days
     selectedPost.topic.replies.forEach(function(reply) {
       if (!reply.day)
       reply.day = this.$filter('date')(new Date(reply.date), 'MMM d, y');
     }, this);
     // sort by day
-    this.getPostsSortedByRecentDay(selectedPost.topic.replies);
+    this.sortByRecentDay(selectedPost.topic.replies);
     return selectedPost;
   }
   addNewComment(postComment, loggedInUser, commentDate, selectedDate) {

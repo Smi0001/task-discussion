@@ -7,6 +7,8 @@ class postController {
       this.$scope.postsService = postsService;
       this.$scope.postDateWiseMap = this.$scope.postsService.getPostsDateWise();
       this.$scope.postList = Array.from(this.$scope.postDateWiseMap);
+      this.$scope.searchString = this.searchString;
+      this.$scope.searchArray = this.getTitles();
       this.$scope.setDay = this.setDay;
       this.$scope.aaj = $filter('date')(new Date(), 'MMM d, y');
       this.$scope.kal = $filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
@@ -28,7 +30,16 @@ class postController {
       return ['$scope', 'postsService', '$filter', '$sce',
        'loginService', '$location', '$timeout', '$compile'];
     }
-
+    getTitles() {
+      let arr = [];
+      angular.forEach(this.$scope.postList, function(item) {
+        angular.forEach(item[1], function(post) {
+          arr.push({'date': post.date, 'title': post.topic.note});
+        });
+      });
+      return arr;
+    }
+    
     handleUserSession() {
       var _scope = this.$scope;
       if (_scope.loginService.isSessionTimeOut()) {
@@ -49,8 +60,15 @@ class postController {
     trustAsHtml(html) {
       return this.$sce.trustAsHtml(html);
     }
-    searchPost() {
-      console.log(this.search, this.postArray);
+    searchPost(date, note) {
+      let _scope = this;
+      document.getElementById('j-search').value = '';
+      console.log(date, note);
+      let suggestionList = document.getElementsByClassName('post-suggest-list');
+      for(; suggestionList.length > 0;) {
+        suggestionList[0].remove();
+      }
+      
     }
     addNewPost() {
       let postText = document.querySelector('#j-modal textarea');
