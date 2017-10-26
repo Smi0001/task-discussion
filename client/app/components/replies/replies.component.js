@@ -4,9 +4,6 @@ import './replies.component.scss';
 
 let repliesComponent = {
   restrict: 'E',
-  scope: {
-    selectedDate: '='
-  },
   template,
   controller,
   controllerAs: 'repliesController'

@@ -179,7 +179,8 @@ $post-box-shadow:  0 2px 5px 0 rgba(0, 0, 0, 0.26);
     .cancel-btn {
         cursor: pointer;
         position: absolute;
-        right: 5px;
+        right: 2px;
+        top: 2px;
         z-index: 10;
     }
 }

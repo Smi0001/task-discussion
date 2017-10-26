@@ -8,8 +8,7 @@ let avatarComponent = {
     userimage: '@',
     username: '@',
     userfname: '@',
-    userlname: '@',
-
+    userlname: '@'
   },
   template,
   controller,

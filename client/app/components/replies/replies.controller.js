@@ -3,16 +3,16 @@ class repliesController {
       this.name = 'replies';
       this.$scope = $scope;
       this.$scope.selectedDate = $attrs.selecteddate;
+      this.$scope.isSearchPost = $attrs.issearchpost == 'true'? true : false;
       this.$scope.postsService = postsService;
       this.$scope.postArray = this.$scope.postsService.getPostByDate(this.$scope.selectedDate);
       this.$scope.replies = this.$scope.postArray.topic.replies;
       this.$scope.trustAsHtml = this.trustAsHtml;
-      this.$scope.$filter = $filter;
       this.$scope.filterDate = this.filterDate;
       this.$scope.aaj = $filter('date')(new Date(), 'MMM d, y');
       this.$scope.kal = $filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
       this.$scope.$sce = $sce;
-      this.$scope.postComment;
+      this.$scope.postComment = '';
       this.$scope.addCommentOnEnter = this.addCommentOnEnter;
       this.$scope.loginService = loginService;
       this.onReadyFn();
@@ -34,18 +34,9 @@ class repliesController {
       }
     }
     filterDate(date) {
-      let dateStr = this.$filter('date')(date, 'MMM d, y');
-      let aaj = this.$filter('date')(new Date(), 'MMM d, y');
-      let kal = this.$filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
-      
-      if (dateStr == aaj)
-        dateStr = 'Today';
-      else if (dateStr == kal)
-        dateStr = 'Yesterday';
-
-      return dateStr;
+      let _scope = this;
+      return _scope.postsService.filterDate(date);
     }
-
     trustAsHtml(html) {
       return this.$sce.trustAsHtml(html);
     }

@@ -47,6 +47,8 @@ class postsService {
     posts.forEach(function(currentPost) {
       currentPost.day = this.$filter('date')(new Date(currentPost.date), 'MMM d, y');
     }, this);
+    // sorted by date
+    this.sortByRecentDate(posts);
     // sorted by day
     this.sortByRecentDay(posts);
 
@@ -119,6 +121,25 @@ class postsService {
         break;
       }
     }
+  }
+  
+  getAaj() {
+    return this.$filter('date')(new Date(), 'MMM d, y');
+  }
+  getKal() {
+    return this.$filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
+  }
+  filterDate(date) {
+    let dateStr = this.$filter('date')(date, 'MMM d, y');
+    let aaj = this.$filter('date')(new Date(), 'MMM d, y');
+    let kal = this.$filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
+    
+    if (dateStr == aaj)
+      dateStr = 'Today';
+    else if (dateStr == kal)
+      dateStr = 'Yesterday';
+
+    return dateStr;
   }
 }
 

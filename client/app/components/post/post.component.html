@@ -6,7 +6,7 @@
     <input id="j-search" ng-model="searchString" value="" placeholder="Search Posts" type="text">
     <ul class="searched-list" ng-hide="searchArray.length == 0">
         <li class="list-group-item post-suggest-list" ng-repeat="item in searchArray | searchFor:searchString">
-            <div ng-click="searchPost(item.date, item.title)" class="topic trim col large-12">{{item.title}}</div>
+            <div ng-click="showComments(item.date, true)" class="topic trim col large-12">{{item.title}}</div>
         </li>
     </ul>
 </div>
@@ -67,9 +67,7 @@
 </div>
 
 <div class="modal comment-modal" id="j-comment-modal">
-    <span class="cancel-btn" ng-click="closeCommentModal()">
-        <img src="app/data/img/cancel.svg" />
-    </span>
+    <img src="app/data/img/cancel.svg" class="cancel-btn" ng-click="closeCommentModal($event)" />
     <div class="modal-content" id="j-current-topics">
     </div>
 </div>

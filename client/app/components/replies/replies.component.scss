@@ -1,9 +1,6 @@
 
 .comment-section {
-    height: 400px;
     margin: 2px;
-    overflow-y: auto;
-    overflow-x: hidden;
     width: 100%;
     .main-topic {
         min-height: 75px;
@@ -17,6 +14,10 @@
     .reply-list {
         min-height: 85px;
         float: right;
+        max-height: 350px;
+        margin: 2px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     .replied {
         cursor: pointer;

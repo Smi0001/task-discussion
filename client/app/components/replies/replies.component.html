@@ -1,4 +1,4 @@
-<div class="large-12 col">
+<div class="large-12 col" ng-if="!isSearchPost">
         <avatar class="avatar j-avatar col" ng-if="user" userimage="{{user.avatar}}"
         username="{{user.name}}" userfname="{{user.fname}}"
         userlname="{{user.lname}}"></avatar>
@@ -61,6 +61,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="large-11 col" ng-if="isSearchPost">
+                    <avatar class="avatar j-avatar col" ng-if="user" userimage="{{user.avatar}}"
+                    username="{{user.name}}" userfname="{{user.fname}}"
+                    userlname="{{user.lname}}"></avatar>
+                <input class="j-post-text post-comment" ng-model="postComment" placeholder="Join the discussion..."
+                ng-keypress="addCommentOnEnter($event)"/>
             </div>
         </div>
     </div>
