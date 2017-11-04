@@ -50,7 +50,7 @@ if (isDev) {
       }),
 
       // OccurenceOrderPlugin: Assign the module and chunk ids by occurrence count. : https://webpack.github.io/docs/list-of-plugins.html#occurenceorderplugin
-      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
 
       // Deduplication: find duplicate dependencies & prevents duplicate inclusion : https://github.com/webpack/docs/wiki/optimization#deduplication
       new webpack.optimize.DedupePlugin()
@@ -117,7 +117,7 @@ if (isDev) {
       }),
 
       // OccurenceOrderPlugin: Assign the module and chunk ids by occurrence count. : https://webpack.github.io/docs/list-of-plugins.html#occurenceorderplugin
-      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
 
       // Deduplication: find duplicate dependencies & prevents duplicate inclusion : https://github.com/webpack/docs/wiki/optimization#deduplication
       new webpack.optimize.DedupePlugin()
