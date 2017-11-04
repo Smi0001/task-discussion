@@ -68,7 +68,7 @@
     "yargs": "4.7.1"
   },
   "scripts": {
-    "prestart": "npm install webpack@^3.0.0 html-webpack-plugin compression-webpack-plugin --save-dev",
+    "prestart": "npm install",
     "start": "webpack && webpack-dev-server --content-base client/ --hot --inline",
     "serve": "webpack && webpack-dev-server --content-base client/ --hot --inline",
     "create Component": "gen comp",
