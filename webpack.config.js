@@ -53,7 +53,7 @@ if (isDev) {
       new webpack.optimize.OccurrenceOrderPlugin(),
 
       // Deduplication: find duplicate dependencies & prevents duplicate inclusion : https://github.com/webpack/docs/wiki/optimization#deduplication
-      new webpack.optimize.DedupePlugin()
+      //new webpack.optimize.DedupePlugin()
     ]
   };
 }else{
@@ -97,7 +97,7 @@ if (isDev) {
       }),
 
       new webpack.optimize.CommonsChunkPlugin('common.js'),
-      new webpack.optimize.DedupePlugin(),
+      //new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
       new CompressionPlugin({
@@ -120,7 +120,7 @@ if (isDev) {
       new webpack.optimize.OccurrenceOrderPlugin(),
 
       // Deduplication: find duplicate dependencies & prevents duplicate inclusion : https://github.com/webpack/docs/wiki/optimization#deduplication
-      new webpack.optimize.DedupePlugin()
+      //new webpack.optimize.DedupePlugin()
     ]
   };
 }
