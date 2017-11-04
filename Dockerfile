@@ -8,6 +8,6 @@ COPY . /usr/src/app
 RUN npm set progress=false
 RUN npm install
 
-EXPOSE $PORT
+EXPOSE 5000
 
 CMD ["npm", "run", "startContainer"]
