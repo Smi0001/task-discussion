@@ -5,7 +5,7 @@ var path = require('path'),
     pkg = require('./package.json'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
+const CompressionPlugin = require("compression-webpack-plugin")
 const isDev = process.env.NODE_ENV !== 'production';
 
 if (isDev) {
