@@ -1,1 +1,1 @@
-web: rm -r node_modules && npm install
+web: rm -rf node_modules && npm install --quiet --production
