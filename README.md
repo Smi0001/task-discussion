@@ -1,4 +1,4 @@
-# task-discussion
+# Task-Discussion
 
 # Steps to Setup the Project:
 
@@ -46,13 +46,13 @@
 2. ```Session management```
 3. ```Dashboard with user profile```
 4. ```TODO page``` *User can add new TODO task, mark, unmark and filter the list with all/active/completed todos*
-5. ```POST page``` *User can add new post, reply to any post, (search feature is pending)*
+5. ```POST page``` *User can add new post, reply to any post or even search any post*
 6. ```COMMENT section``` *click on post to see the comment section, comment/reply on the selected post*
 
 *There is an issue in injecting Angular Material Library to the project, however the styling is done using Angular Material guidelines.*
 
 # Pending tasks
-1. Search posts
+1. Like / Unlike post/comments(replies) & share the post.
 2. Include *Keep me Signed In* feature using ngCookies
 
 # More plannig

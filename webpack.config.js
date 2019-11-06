@@ -5,7 +5,7 @@ var path = require('path'),
     pkg = require('./package.json'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
+const CompressionPlugin = require("compression-webpack-plugin")
 const isDev = process.env.NODE_ENV !== 'production';
 
 if (isDev) {
@@ -50,10 +50,10 @@ if (isDev) {
       }),
 
       // OccurenceOrderPlugin: Assign the module and chunk ids by occurrence count. : https://webpack.github.io/docs/list-of-plugins.html#occurenceorderplugin
-      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
 
       // Deduplication: find duplicate dependencies & prevents duplicate inclusion : https://github.com/webpack/docs/wiki/optimization#deduplication
-      new webpack.optimize.DedupePlugin()
+      //new webpack.optimize.DedupePlugin()
     ]
   };
 }else{
@@ -97,7 +97,7 @@ if (isDev) {
       }),
 
       new webpack.optimize.CommonsChunkPlugin('common.js'),
-      new webpack.optimize.DedupePlugin(),
+      //new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
       new CompressionPlugin({
@@ -117,10 +117,10 @@ if (isDev) {
       }),
 
       // OccurenceOrderPlugin: Assign the module and chunk ids by occurrence count. : https://webpack.github.io/docs/list-of-plugins.html#occurenceorderplugin
-      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
 
       // Deduplication: find duplicate dependencies & prevents duplicate inclusion : https://github.com/webpack/docs/wiki/optimization#deduplication
-      new webpack.optimize.DedupePlugin()
+      //new webpack.optimize.DedupePlugin()
     ]
   };
 }

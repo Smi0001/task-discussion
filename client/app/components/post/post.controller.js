@@ -1,4 +1,3 @@
-
 class postController {
   constructor($scope, postsService, $filter, $sce,
      loginService, $location, $timeout, $compile) {
@@ -7,7 +6,8 @@ class postController {
       this.$scope.postsService = postsService;
       this.$scope.postDateWiseMap = this.$scope.postsService.getPostsDateWise();
       this.$scope.postList = Array.from(this.$scope.postDateWiseMap);
-      this.$scope.setDay = this.setDay;
+      this.$scope.searchString = this.searchString;
+      this.$scope.searchArray = this.getTitles();
       this.$scope.aaj = $filter('date')(new Date(), 'MMM d, y');
       this.$scope.kal = $filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
       this.$scope.$sce = $sce;
@@ -28,7 +28,16 @@ class postController {
       return ['$scope', 'postsService', '$filter', '$sce',
        'loginService', '$location', '$timeout', '$compile'];
     }
-
+    getTitles() {
+      let arr = [];
+      angular.forEach(this.$scope.postList, function(item) {
+        angular.forEach(item[1], function(post) {
+          arr.push({'date': post.date, 'title': post.topic.note});
+        });
+      });
+      return arr;
+    }
+    
     handleUserSession() {
       var _scope = this.$scope;
       if (_scope.loginService.isSessionTimeOut()) {
@@ -47,11 +56,10 @@ class postController {
     }
 
     trustAsHtml(html) {
+      html = html.replace('\n',' ');
       return this.$sce.trustAsHtml(html);
     }
-    searchPost() {
-      console.log(this.search, this.postArray);
-    }
+    
     addNewPost() {
       let postText = document.querySelector('#j-modal textarea');
       postText.value = ""
@@ -75,23 +83,22 @@ class postController {
       }
     }
 
-    closeCommentModal() {
-      document.getElementById('j-comment-modal').style.display = 'none';
+    closeCommentModal(_event) {
+      _event.stopImmediatePropagation();
+      let target = _event.target;
+      _event.target.parentNode.style.display = 'none';
       document.getElementById('j-overlay').style.display = 'none';
     }
-    showComments(selectedDate) {
+    showComments(selectedDate, isSearchPost) {
+      if (!isSearchPost) isSearchPost = false;
       let _scope = this;
       let newScope = _scope.$new(true, _scope);
-      newScope = angular.merge(newScope, selectedDate);
-      let html = '<replies selecteddate="' + selectedDate + '"></replies>';
+      let html = '<replies selecteddate="' + selectedDate + '" issearchpost="' + isSearchPost + '"></replies>';
       let element = document.getElementById('j-current-topics');
       element.innerHTML = "";
       element.append(_scope.$compile(html)(newScope)[0]);
-      let postComment = document.querySelector('#j-comment-modal input');
-      postComment.value = ""
       document.getElementById('j-comment-modal').style.display = 'block';
       document.getElementById('j-overlay').style.display = 'block';
-      postComment.focus();
     }
   }
 

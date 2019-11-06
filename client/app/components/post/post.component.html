@@ -1,9 +1,14 @@
 <div class="post-header"></div>
 
 <div class="search-wrap" >
-    <div class="search-icon" ng-click="searchPost()">
+    <div class="search-icon">
     </div>
-    <input class="j-search" ng-keyup="searchPost($event)" placeholder="Search Posts" type="search">
+    <input id="j-search" ng-model="searchString" value="" placeholder="Search Posts" type="text">
+    <ul class="searched-list" ng-hide="searchArray.length == 0">
+        <li class="list-group-item post-suggest-list" ng-repeat="item in searchArray | searchFor:searchString">
+            <div ng-click="showComments(item.date, true)" class="topic trim col large-12">{{item.title}}</div>
+        </li>
+    </ul>
 </div>
 
 <svg height="80" width="80" class="add-post" ng-click="addNewPost()">
@@ -15,13 +20,13 @@
 
 <div class="post-div">
     <div class="day-wise" ng-repeat="postArray in postList">
-        <div ng-repeat="items in postArray track by $index" class="">
+        <div ng-repeat="items in postArray track by $index">
             <div ng-if="$index == 0" class="day" ng-init="date = (items == aaj ? 'Today' : (items == kal? 'Yesterday': items))">
                 {{date}}
             </div>
             <div ng-if="$index == 1">
-                <div class="post-wise large-12" ng-repeat="_post in items track by $index" 
-                ng-click="showComments(_post.date)">
+                <div class="post-wise large-12" ng-repeat="_post in items track by $index"
+                    ng-click="showComments(_post.date)" title="Click for comments">
                     <avatar class="avatar" userimage="{{_post.user.avatar}}"
                      username="{{_post.user.name}}" userfname="{{_post.user.fname}}"
                      userlname="{{_post.user.lname}}"></avatar>
@@ -62,9 +67,7 @@
 </div>
 
 <div class="modal comment-modal" id="j-comment-modal">
-    <span class="cancel-btn" ng-click="closeCommentModal()">
-        <img src="app/data/img/cancel.svg" />
-    </span>
+    <img src="app/data/img/cancel.svg" class="cancel-btn" ng-click="closeCommentModal($event)" />
     <div class="modal-content" id="j-current-topics">
     </div>
 </div>

@@ -9,7 +9,6 @@ class postsService {
     this.$filter = $filter;
     this._posts = angular.copy(rawPost);
     this.$rootScope = $rootScope;
-    
   }
   static get $inject() {
     return ['$filter', '$rootScope'];
@@ -23,7 +22,7 @@ class postsService {
     posts = modifiedPost;//save posts to DB
   }
 
-  getPostsSortedByRecentDay(posts) {
+  sortByRecentDay(posts) {
     posts
     .sort((b,a) => {
       return (a.day > b.day) ?
@@ -33,7 +32,7 @@ class postsService {
         );
     });
   }
-  getPostsSortedByRecentDate(posts) {
+  sortByRecentDate(posts) {
     posts
     .sort((b,a) => {
       return (a.date > b.date) ?
@@ -48,8 +47,10 @@ class postsService {
     posts.forEach(function(currentPost) {
       currentPost.day = this.$filter('date')(new Date(currentPost.date), 'MMM d, y');
     }, this);
+    // sorted by date
+    this.sortByRecentDate(posts);
     // sorted by day
-    this.getPostsSortedByRecentDay(posts);
+    this.sortByRecentDay(posts);
 
     // club day wise
     postDateWiseMap.clear();
@@ -98,14 +99,14 @@ class postsService {
       }
     }
     //sort by date first
-    this.getPostsSortedByRecentDate(selectedPost.topic.replies);
+    this.sortByRecentDate(selectedPost.topic.replies);
     //assert corresponding days
     selectedPost.topic.replies.forEach(function(reply) {
       if (!reply.day)
       reply.day = this.$filter('date')(new Date(reply.date), 'MMM d, y');
     }, this);
     // sort by day
-    this.getPostsSortedByRecentDay(selectedPost.topic.replies);
+    this.sortByRecentDay(selectedPost.topic.replies);
     return selectedPost;
   }
   addNewComment(postComment, loggedInUser, commentDate, selectedDate) {
@@ -120,6 +121,25 @@ class postsService {
         break;
       }
     }
+  }
+  
+  getAaj() {
+    return this.$filter('date')(new Date(), 'MMM d, y');
+  }
+  getKal() {
+    return this.$filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
+  }
+  filterDate(date) {
+    let dateStr = this.$filter('date')(date, 'MMM d, y');
+    let aaj = this.$filter('date')(new Date(), 'MMM d, y');
+    let kal = this.$filter('date')(new Date().setDate(new Date().getDate() - 1), 'MMM d, y');
+    
+    if (dateStr == aaj)
+      dateStr = 'Today';
+    else if (dateStr == kal)
+      dateStr = 'Yesterday';
+
+    return dateStr;
   }
 }
 
